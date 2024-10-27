@@ -7,7 +7,25 @@
 </head>
 <body>
     <h1>Welcome to the Vendor Scraper</h1>
-    <p>This page will display the scraped product data once it is set up.</p>
-    <!-- Add more content or elements as needed -->
+    <p>This page displays the scraped product data.</p>
+    <div id="product-list">Loading products...</div>
+
+    <script>
+        // Fetch the scraped data from the JSON file
+        fetch('scraped_data.json')
+            .then(response => response.json())
+            .then(data => {
+                let content = '<ul>';
+                data.forEach(item => {
+                    content += `<li>${item.name} - ${item.price} - <a href="${item.affiliate_link}">Buy Now</a></li>`;
+                });
+                content += '</ul>';
+                document.getElementById('product-list').innerHTML = content;
+            })
+            .catch(error => {
+                document.getElementById('product-list').innerHTML = 'Error loading data.';
+                console.error('Error:', error);
+            });
+    </script>
 </body>
 </html>
