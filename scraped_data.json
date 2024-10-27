@@ -1,0 +1,9 @@
+import json
+
+def save_data_to_json(products):
+    with open('scraped_data.json', 'w') as f:
+        json.dump(products, f, indent=4)
+
+# Call the function after scraping
+products = scrape_store('your_vendor_url')
+save_data_to_json(products)
